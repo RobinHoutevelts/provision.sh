@@ -416,7 +416,7 @@ else
 fi
 
 log "DNS..."
-
+domain="${alter}"
 if [ "${alter}" == "" ]; then
     log "Creating domain ${dropletName}\n"
     run domain create "${dropletName}" --ip-address "${dnsip}"
