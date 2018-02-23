@@ -3,6 +3,8 @@ help_text <<EOF
 PHP dependencies, should not be used directly.
 EOF
 
+apt_repo ppa:ondrej/php
+
 install composer \
     php-pear \
     php${2}-dev \
@@ -19,6 +21,10 @@ install composer \
 
 if [ "${2}" != "5.6" ]; then
     install php${2}-zip
+fi
+
+if [ "${2}" != "7.1" ]; then
+ install php${2}-xdebug
 fi
 
 

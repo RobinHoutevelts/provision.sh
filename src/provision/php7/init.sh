@@ -32,6 +32,8 @@ fix_user_perms "${webuser}"
 template "$1/pool.ini" user="www-main" mail_from="info@$DOMAIN" \
     > /etc/php/7.0/fpm/pool.d/www.conf
 
+cat "$1/20-xdebug.ini" > /etc/php/7.0/fpm/conf.d/20-xdebug.ini
+
 native_service nginx.service
 native_service php7.0-fpm.service
 
