@@ -56,6 +56,7 @@ IFS=$'\n'
 _keyID () {
     local keys=($(run ssh-key list --no-header))
     local agent=($(ssh-add -l -E md5))
+    local selection=1
 
     while true; do
         local i=0
@@ -74,6 +75,7 @@ _keyID () {
 
             list "${i})" "${key}"
             if [ $inAgent -eq 1 ]; then
+                selection=i
                 log ' (in ssh-agent)'
             else
                 log ' (NOT in ssh-agent)'
@@ -82,7 +84,6 @@ _keyID () {
             echo
         done
 
-        local selection=1
         if [ $i -gt 1 ] && [ $tryUnattended -eq 0 ]; then
             prompt 'Which key?'
             read selection
@@ -169,7 +170,7 @@ _imageID () {
         done
 
         local selection=1
-        if [ $i -gt 1 ]; then
+        if [ $i -gt 2 ]; then
             prompt 'Which img?'
             read selection
         fi
