@@ -17,14 +17,11 @@ install composer \
     php${2}-mbstring \
     php${2}-xml \
     php${2}-soap \
-    php${2}-curl
+    php${2}-curl \
+    php${2}-xdebug
 
 if [ "${2}" != "5.6" ]; then
     install php${2}-zip
-fi
-
-if [ "${2}" != "7.1" ]; then
- install php${2}-xdebug
 fi
 
 
@@ -73,8 +70,10 @@ if [ ! -f /etc/php/${2}/mods-available/redis.ini ]; then
 fi
 echo 'extension=redis.so' > /etc/php/${2}/mods-available/redis.ini
 
+if ! [ -x "$(command -v drush)" ]; then
+  su $webuser -c 'composer global require drush/drush:^8.0'
+fi
 
-su $webuser -c 'composer global require drush/drush:^8.0'
 set_line "/home/${webuser}/.bashrc" \
     'PATH=$PATH:$HOME/.config/composer/vendor/bin'
 
