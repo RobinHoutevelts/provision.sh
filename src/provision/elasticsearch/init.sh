@@ -12,7 +12,7 @@ if ! dpkg --status "oracle-java8-installer" >/dev/null 2>&1; then
 fi
 
 if ! dpkg --status "elasticsearch" >/dev/null 2>&1; then
-    wget -O /tmp/elastic.deb 'https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.1.1.deb'
+    wget -O /tmp/elastic.deb 'https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.5.2.deb'
     dpkg -i /tmp/elastic.deb
 fi
 
