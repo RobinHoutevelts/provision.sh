@@ -8,6 +8,7 @@ include web private
 include mailcatcher private
 include php 7.2
 include mariadb
+include ssl
 
 install nginx
 
@@ -15,6 +16,8 @@ if [ -e /etc/php/7.2/fpm/conf.d/10-opcache.ini ]; then
     rm /etc/php/7.2/fpm/conf.d/10-opcache.ini;
 fi
 
+rm /etc/nginx/sites-enabled/php7-php7.conf 2>/dev/null || true  # todo: remove once base image is cleaned up
+rm /etc/nginx/sites-enabled/php7-seven.conf 2>/dev/null || true # todo: remove once base image is cleaned up
 rm /etc/nginx/sites-enabled/default 2>/dev/null || true
 
 for i in ${@:2}; do
